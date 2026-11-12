@@ -106,7 +106,7 @@ def optimize_LMN(model, data, args, weights=None):
                                      env_id=args.env_id,
                                      render_env=False,
                                      n_episodes=args.validation_n_episodes)
-            print(model.get_gains())
+            #print(model.get_gains())
             print(f'Mean return: {np.mean(val_ret)} ± {np.std(val_ret)}')
     return True
 

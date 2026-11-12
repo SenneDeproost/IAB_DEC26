@@ -22,7 +22,7 @@ es_patience: 10
 es_min_delta: 0.00000001
 
 # Episodes for data
-data_n_episodes: 100
+data_n_episodes: 10
 
 # Validating subpolicies
-validation_n_episodes: 100
+validation_n_episodes: 10

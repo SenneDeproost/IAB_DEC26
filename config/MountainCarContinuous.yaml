@@ -17,12 +17,12 @@ controller_init: None
 # Optimizing controller
 learning_rate: 0.1
 batch_size: 256
-n_epochs_training: 10
+n_epochs_training: 50
 es_patience: 10
 es_min_delta: 0.00000001
 
 # Episodes for data
-data_n_episodes: 100
+data_n_episodes: 10
 
 # Validating subpolicies
 validation_n_episodes: 10

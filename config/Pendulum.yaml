@@ -1,0 +1,28 @@
+env_id: Pendulum-v1
+project: LoPIDN_test
+save_dir: ./logs
+algorithm: TD3
+rl_agent: ./trained_rl/agents/TD3/Pendulum-v1
+seed: 0
+n_iterations: 20
+
+# Target
+target: [1.0, 0.0, 0.0]
+
+# Local Model Network
+n_controllers: 2
+controller_class: MIMOPID_WIND
+controller_init: None
+
+# Optimizing controller
+learning_rate: 0.1
+batch_size: 256
+n_epochs_training: 50 #50
+es_patience: 10
+es_min_delta: 0.00000001
+
+# Episodes for data
+data_n_episodes: 100
+
+# Validating subpolicies
+validation_n_episodes: 100

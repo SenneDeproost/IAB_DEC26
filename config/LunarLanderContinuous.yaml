@@ -1,0 +1,28 @@
+env_id: LunarLanderContinuous-v3
+project: LoPIDN_test
+save_dir: ./logs
+algorithm: TD3
+rl_agent: ./trained_rl/agents/TD3/LunarLanderContinuous-v3
+seed: 0
+n_iterations: 20
+
+# Target
+target: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0] # All zeroes except the left and the right leg
+
+# Local Model Network
+n_controllers: 5
+controller_class: MIMOPID_WIND #MIMOPID_WIND # MIMOPID
+controller_init: None
+
+# Optimizing controller
+learning_rate: 0.01
+batch_size: 256
+n_epochs_training: 2000
+es_patience: 10
+es_min_delta: 0.00000001
+
+# Episodes for data
+data_n_episodes: 1 #10
+
+# Validating subpolicies
+validation_n_episodes: 1 #1

@@ -72,9 +72,9 @@ def plot_routing(model, env_id, seed=0):
 
     return r
 
-def create_gif(controller, args, path):
+def create_rl_gif(controller, args, path):
     img_env = gym.make(args.env_id, render_mode='rgb_array')
-    obs, info = img_env.reset(seed=0)
+    obs, info = img_env.reset(seed=args.seed)
     done = False
     truncated = False
 
@@ -83,7 +83,32 @@ def create_gif(controller, args, path):
     frames.append(img_env.render())
 
     while not (done or truncated):
-        action, _ = controller.predict(obs, deterministic=True)
+        action, _ = controller.predict(obs)
+        obs, reward, done, truncated, info = img_env.step(action)
+        frames.append(img_env.render())
+
+    img_env.close()
+
+    # Save the captured frames as a GIF that repeats (loop=0)
+    gif_path = path
+    imageio.mimsave(gif_path, frames, fps=30, loop=0)
+
+    # Render GIF inline in the notebook
+    display(Image(filename=gif_path))
+
+def create_pid_gif(controller, args, path):
+    img_env = gym.make(args.env_id, render_mode='rgb_array')
+    obs, info = img_env.reset(seed=args.seed)
+    done = False
+    truncated = False
+    controller.reset_controllers()
+
+    frames = []
+    # Capture initial frame
+    frames.append(img_env.render())
+
+    while not (done or truncated):
+        action = controller.predict(obs)
         obs, reward, done, truncated, info = img_env.step(action)
         frames.append(img_env.render())
 

@@ -56,6 +56,8 @@ def optimize_controller(controller, data, args, weights=None):
 
 def optimize_LMN(model, data, args, weights=None):
 
+    utils.set_seed(args.seed)
+
     optimizer = th.optim.Adam(model.controllers.parameters(), lr=args.learning_rate)
 
     for epoch in tqdm(range(args.n_epochs_training)):

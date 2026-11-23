@@ -1,7 +1,17 @@
 import gymnasium as gym
 from tqdm import tqdm
+import random
+import torch
 import numpy as np
 from matplotlib import pyplot as plt
+
+import imageio
+from IPython.display import Image, display
+
+def set_seed(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
 
 def softmax(x):
     e_x = np.exp(x - np.max(x))
@@ -61,3 +71,27 @@ def plot_routing(model, env_id, seed=0):
     print(model.get_gains())
 
     return r
+
+def create_gif(controller, args, path):
+    img_env = gym.make(args.env_id, render_mode='rgb_array')
+    obs, info = img_env.reset(seed=0)
+    done = False
+    truncated = False
+
+    frames = []
+    # Capture initial frame
+    frames.append(img_env.render())
+
+    while not (done or truncated):
+        action, _ = controller.predict(obs, deterministic=True)
+        obs, reward, done, truncated, info = img_env.step(action)
+        frames.append(img_env.render())
+
+    img_env.close()
+
+    # Save the captured frames as a GIF that repeats (loop=0)
+    gif_path = path
+    imageio.mimsave(gif_path, frames, fps=30, loop=0)
+
+    # Render GIF inline in the notebook
+    display(Image(filename=gif_path))

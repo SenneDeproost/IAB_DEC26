@@ -17,7 +17,7 @@ controller_init: None
 # Optimizing controller
 learning_rate: 0.1
 batch_size: 256
-n_epochs_training: 50
+n_epochs_training: 20
 es_patience: 10
 es_min_delta: 0.00000001
 

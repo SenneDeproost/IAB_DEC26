@@ -68,9 +68,8 @@ def plot_routing(model, env_id, seed=0):
         plt.plot(w[:,c])
     plt.show()
     #print(w[:-10])
-    print(model.get_gains())
+    #print(model.get_gains())
 
-    return r
 
 def create_rl_gif(controller, args, path, seed=0):
     img_env = gym.make(args.env_id, render_mode='rgb_array')

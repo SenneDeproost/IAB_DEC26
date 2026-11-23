@@ -15,7 +15,7 @@ controller_class: MIMOPID_WIND
 controller_init: None
 
 # Optimizing controller
-learning_rate: 0.1
+learning_rate: 0.05
 batch_size: 256
 n_epochs_training: 50 #50
 es_patience: 10

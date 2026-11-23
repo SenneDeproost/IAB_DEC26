@@ -72,9 +72,9 @@ def plot_routing(model, env_id, seed=0):
 
     return r
 
-def create_rl_gif(controller, args, path):
+def create_rl_gif(controller, args, path, seed=0):
     img_env = gym.make(args.env_id, render_mode='rgb_array')
-    obs, info = img_env.reset(seed=args.seed)
+    obs, info = img_env.reset(seed=seed)
     done = False
     truncated = False
 
@@ -96,9 +96,9 @@ def create_rl_gif(controller, args, path):
     # Render GIF inline in the notebook
     display(Image(filename=gif_path))
 
-def create_pid_gif(controller, args, path):
+def create_pid_gif(controller, args, path, seed=0):
     img_env = gym.make(args.env_id, render_mode='rgb_array')
-    obs, info = img_env.reset(seed=args.seed)
+    obs, info = img_env.reset(seed=seed)
     done = False
     truncated = False
     controller.reset_controllers()
